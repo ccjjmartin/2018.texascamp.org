@@ -54,8 +54,8 @@ const Overview: StatelessComponent<IOverviewProps> = ({
   null;
 
 const pickLoading = R.propOr(false, 'loading');
-const pickCount = R.pathOr(0, ['nodeQuery', 'count']);
-const pickEntities = R.pathOr(0, ['nodeQuery', 'entities']);
+const pickCount = R.pathOr([], ['nodeQuery', 'count']);
+const pickEntities = R.pathOr([], ['nodeQuery', 'entities']);
 
 export interface IOverviewQueryProps {
   page: number;
@@ -102,7 +102,7 @@ const withQuery = graphql<
 const pickPage = R.compose(
   Math.abs,
   R.flip(R.curryN(2, parseInt))(10),
-  R.pathOr(0, ['url', 'query', 'page'])
+  R.pathOr([], ['url', 'query', 'page'])
 );
 
 const withPagination = withPropsOnChange(['url'], props => ({
